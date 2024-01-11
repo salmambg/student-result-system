@@ -17,6 +17,4 @@ public class DepartmentRequest {
     @NotNull(message = "department name should not be null")
     private String name;
 
-    private List<Student> studentNames = new ArrayList<>();
-
 }

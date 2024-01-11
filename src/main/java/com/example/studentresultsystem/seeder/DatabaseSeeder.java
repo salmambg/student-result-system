@@ -27,6 +27,7 @@ public class DatabaseSeeder {
         logger.info("Run Seeder --------------------------");
         seedDepartmentData();
         seedStudentData();
+        seedStudentDepartmentData();
         logger.info("End Seeder --------------------------");
     }
     private void seedDepartmentData() {
@@ -81,7 +82,7 @@ public class DatabaseSeeder {
 
         studentRepository.saveAll(students);
     }
-    private void seedStudentCourseData() {
+    private void seedStudentDepartmentData() {
         List<Student> students = new ArrayList<>();
 
         Department department1 = departmentRepository.findById(10001).orElse(null);
@@ -89,7 +90,7 @@ public class DatabaseSeeder {
             List<Department> departmentArrayList = new ArrayList<>();
             departmentArrayList.add(department1);
             Student student1= studentRepository.findById(20001).orElse(null);
-            student1.setDepartments(departmentArrayList);
+            student1.setDepartment(department1);
             students.add(student1);
         }
 
@@ -98,7 +99,7 @@ public class DatabaseSeeder {
             List<Department> departmentArrayList = new ArrayList<>();
             departmentArrayList.add(department2);
             Student student2= studentRepository.findById(20002).orElse(null);
-            student2.setDepartments(departmentArrayList);
+            student2.setDepartment((Department) departmentArrayList);
             students.add(student2);
         }
 
@@ -107,7 +108,7 @@ public class DatabaseSeeder {
             List<Department> departmentArrayList = new ArrayList<>();
             departmentArrayList.add(department3);
             Student student3= studentRepository.findById(20003).orElse(null);
-            student3.setDepartments(departmentArrayList);
+            student3.setDepartment((Department) departmentArrayList);
             students.add(student3);
         }
         Department department4 = departmentRepository.findById(10002).orElse(null);
@@ -115,7 +116,7 @@ public class DatabaseSeeder {
             List<Department> departmentArrayList = new ArrayList<>();
             departmentArrayList.add(department4);
             Student student4= studentRepository.findById(20004).orElse(null);
-            student4.setDepartments(departmentArrayList);
+            student4.setDepartment((Department) departmentArrayList);
             students.add(student4);
         }
         studentRepository.saveAll(students);

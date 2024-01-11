@@ -1,68 +1,62 @@
 package com.example.studentresultsystem.service;
 
-import com.example.studentresultsystem.dto.DepartmentRequest;
 import com.example.studentresultsystem.entity.Department;
-import com.example.studentresultsystem.entity.Student;
 import com.example.studentresultsystem.exception.UserNotFoundException;
 import com.example.studentresultsystem.repository.DepartmentRepository;
-import com.example.studentresultsystem.repository.StudentRepository;
+import com.example.studentresultsystem.utils.Constants;
+import jakarta.validation.ConstraintViolationException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DepartmentService {
+    private static Logger LOG = LoggerFactory.getLogger(DepartmentService.class);
+
     @Autowired
     private DepartmentRepository departmentRepository;
-    @Autowired
-    private StudentRepository studentRepository;
 
 
     public List<Department> getAllDepartments() {
         return departmentRepository.findAll();
     }
-    public Department saveDepartment(DepartmentRequest departmentRequest) {
-        Department department = new Department();
-        department.setName(departmentRequest.getName());
 
-        List<Student> studentNames = departmentRequest.getStudentNames();
-
-        if (studentNames != null && !studentNames.isEmpty()) {
-            List<Student> students = new ArrayList<>();
-
-            for (Student studentName : studentNames) {
-                Student student = new Student();
-                student.setName(studentName.getName());
-                student.setGrade(studentName.getGrade());
-                student.setGender(studentName.getGender());
-                student.setRollNumber(studentName.getRollNumber());
-                student.setDepartments(studentName.getDepartments());
-                students.add(studentRepository.save(student));
-            }
-            department.setStudents(students);
-        }
-        return departmentRepository.save(department);
-    }
-    public Department getDepartment(int id) throws UserNotFoundException {
-        Department department = departmentRepository.findByDepartmentId(id);
-        if (department!= null) {
-            return department;
-        }else {
-            throw new UserNotFoundException("department id not found: " + id);
-        }
-    }
-    public Department updateDepartment(int id, DepartmentRequest departmentRequest) throws UserNotFoundException {
-        Department existingDepartment = getDepartment(id);
-        return departmentRepository.save(existingDepartment);
-    }
-
-    public void deleteDepartment(int id) throws UserNotFoundException {
+    public Department create(Department department) throws UserNotFoundException {
         try {
-            departmentRepository.deleteById(id);
-        } catch (Exception exception) {
-            throw new UserNotFoundException("department id not found: " + id);
+            return departmentRepository.save(department);
+        } catch (DataIntegrityViolationException | ConstraintViolationException exception) {
+            LOG.warn(Constants.DATA_VIOLATION + exception.getMessage());
+            throw new UserNotFoundException(Constants.ALREADY_EXISTS);
         }
     }
-
+        public Department getByID (int id) throws UserNotFoundException {
+            Optional<Department> department = departmentRepository.findById(id);
+            if (department.isPresent()) {
+                return department.get();
+            } else {
+                throw new UserNotFoundException("department id not found: " + id);
+            }
+        }
+    public Department update(Department department) throws UserNotFoundException {
+       Department existingDepartment = getByID(department.getId());
+        BeanUtils.copyProperties(department, existingDepartment, "id");
+        try {
+            return departmentRepository.save(existingDepartment);
+        } catch (DataIntegrityViolationException | ConstraintViolationException exception) {
+            LOG.warn(Constants.DATA_VIOLATION + exception.getMessage());
+            throw new UserNotFoundException(Constants.ALREADY_EXISTS);
+        }
+    }
+        public void deleteDepartment (int id) throws UserNotFoundException {
+            try {
+                departmentRepository.deleteById(id);
+            } catch (Exception exception) {
+                throw new UserNotFoundException("department id not found: " + id);
+            }
+        }
 }

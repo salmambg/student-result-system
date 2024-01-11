@@ -4,14 +4,13 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
 import java.util.List;
 
 
 @Data
-@AllArgsConstructor(staticName = "build")
+@AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "departments")
 @Entity
 public class Department {
     @Id
@@ -20,7 +19,12 @@ public class Department {
     @Column(unique = true)
     private String name;
 
-    @ManyToMany(mappedBy = "departments")
-    private List<Student> students = new ArrayList<>();
+    @OneToMany (mappedBy = "department", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Student>students;
+
+    public Department(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
 }
