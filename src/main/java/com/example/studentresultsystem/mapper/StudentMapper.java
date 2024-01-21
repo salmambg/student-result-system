@@ -1,8 +1,6 @@
 package com.example.studentresultsystem.mapper;
 
-import com.example.studentresultsystem.dto.DepartmentWithOutStudentDTO;
-import com.example.studentresultsystem.dto.StudentDTO;
-import com.example.studentresultsystem.dto.StudentRequest;
+import com.example.studentresultsystem.dto.*;
 import com.example.studentresultsystem.entity.Department;
 import com.example.studentresultsystem.entity.Student;
 
@@ -20,6 +18,16 @@ public final class StudentMapper {
         Department department = new Department();
         department.setId(departmentID);
         return new Student( studentID, request.getName(),request.getGrade(),request.getGender(),request.getRollNumber(),department);
+    }
+
+    public static StudentWithoutDepartmentDTO convertStudentRequestWithoutDepartmentDTO(Student student) {
+        return new StudentWithoutDepartmentDTO(
+                student.getId(),
+                student.getName(),
+                student.getGrade(),
+                student.getGender(),
+                student.getRollNumber());
+
     }
 
     public static StudentDTO convertStudentToStudentDTO(Student student, Department department) {

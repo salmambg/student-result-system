@@ -11,9 +11,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class DepartmentService {
@@ -54,11 +56,12 @@ public class DepartmentService {
             throw new UserNotFoundException(Constants.ALREADY_EXISTS);
         }
     }
-        public void deleteDepartment (int id) throws UserNotFoundException {
-            try {
-                departmentRepository.deleteById(id);
-            } catch (Exception exception) {
-                throw new UserNotFoundException("department id not found: " + id);
-            }
+    public void deleteById(Integer id) {
+        try {
+            departmentRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException ex) {
+            LOG.warn(Constants.DEPARTMENT_NOT_FOUND + id);
+            throw new EntityNotFoundException(Constants.DEPARTMENT_NOT_FOUND + id);
         }
+    }
 }

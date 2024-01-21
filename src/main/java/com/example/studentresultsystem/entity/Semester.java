@@ -1,11 +1,12 @@
 package com.example.studentresultsystem.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -14,5 +15,10 @@ import lombok.NoArgsConstructor;
 public class Semester {
     @Id
     @GeneratedValue
-    private Long id;
+    private Integer id;
+    private String name;
+
+//    @JsonManagedReference
+//    @OneToMany(mappedBy = "semester", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<Subject> subjects;
 }

@@ -1,6 +1,5 @@
 package com.example.studentresultsystem.service;
 
-import com.example.studentresultsystem.entity.Department;
 import com.example.studentresultsystem.entity.Student;
 import com.example.studentresultsystem.exception.UserNotFoundException;
 import com.example.studentresultsystem.repository.StudentRepository;
@@ -12,9 +11,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class StudentService {
@@ -49,8 +50,7 @@ public class StudentService {
     }
     public Student update(Student student) throws UserNotFoundException {
         Student existingStudent = getById(student.getId());
-        departmentService.getByID(student.getDepartment().getId());
-        BeanUtils.copyProperties(student, existingStudent, "id");
+        BeanUtils.copyProperties(student, existingStudent,  "id");
         try {
             return studentRepository.save(existingStudent);
         } catch (DataIntegrityViolationException | ConstraintViolationException exception) {
@@ -59,11 +59,12 @@ public class StudentService {
         }
     }
 
-    public void deleteStudent(int id) throws UserNotFoundException {
+    public void deleteByStudentId(Integer id) {
         try {
             studentRepository.deleteById(id);
-        } catch (Exception exception) {
-            throw new UserNotFoundException("student id not found: " + id);
+        } catch (EmptyResultDataAccessException ex) {
+            LOG.warn(Constants.STUDENT_NOT_FOUND + id);
+            throw new EntityNotFoundException(Constants.STUDENT_NOT_FOUND + id);
         }
     }
 
