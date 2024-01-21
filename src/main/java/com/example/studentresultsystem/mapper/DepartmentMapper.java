@@ -6,7 +6,6 @@ import com.example.studentresultsystem.dto.DepartmentWithStudentDTO;
 import com.example.studentresultsystem.dto.StudentDTO;
 import com.example.studentresultsystem.entity.Department;
 import com.example.studentresultsystem.entity.Student;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,17 +20,9 @@ public final class DepartmentMapper {
         return new Department( id, request.getName());
 
     }
-    public static DepartmentWithStudentDTO convertDepartmentWithStudentDTO(Department department) {
 
-        List<StudentDTO> studentDTOs = department.getStudents().stream()
-                .map(DepartmentMapper::convertStudentoStudentDTO)
-                .collect(Collectors.toList());
-
-        return new DepartmentWithStudentDTO(
-                department.getId(),
-                department.getName(),
-                studentDTOs
-        );
+    public static DepartmentWithOutStudentDTO convertDepartmentRequestWithID(Department department) {
+        return new DepartmentWithOutStudentDTO(department.getId(), department.getName());
     }
 
     public static DepartmentWithOutStudentDTO convertDepartmentWithoutStudentDTO(Department department) {
@@ -45,16 +36,6 @@ public final class DepartmentMapper {
         return departmentList.stream()
                 .map(DepartmentMapper::convertDepartmentWithoutStudentDTO)
                 .collect(Collectors.toList());
-    }
-
-    private static StudentDTO convertStudentoStudentDTO(Student student) {
-        return new StudentDTO(
-                student.getId(),
-                student.getName(),
-                student.getGrade(),
-                student.getGender(),
-                student.getRollNumber()
-        );
     }
 
 }

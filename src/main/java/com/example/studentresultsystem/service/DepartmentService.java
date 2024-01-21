@@ -4,6 +4,7 @@ import com.example.studentresultsystem.entity.Department;
 import com.example.studentresultsystem.exception.UserNotFoundException;
 import com.example.studentresultsystem.repository.DepartmentRepository;
 import com.example.studentresultsystem.utils.Constants;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,12 +35,13 @@ public class DepartmentService {
             throw new UserNotFoundException(Constants.ALREADY_EXISTS);
         }
     }
-        public Department getByID (int id) throws UserNotFoundException {
+        public Department getByID (int id)  {
             Optional<Department> department = departmentRepository.findById(id);
             if (department.isPresent()) {
                 return department.get();
             } else {
-                throw new UserNotFoundException("department id not found: " + id);
+                LOG.warn(Constants.DEPARTMENT_NOT_FOUND + id);
+                throw new EntityNotFoundException(Constants.DEPARTMENT_NOT_FOUND + id);
             }
         }
     public Department update(Department department) throws UserNotFoundException {

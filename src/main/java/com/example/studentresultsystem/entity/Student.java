@@ -1,9 +1,11 @@
 package com.example.studentresultsystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor
@@ -13,25 +15,17 @@ import lombok.NoArgsConstructor;
 public class Student {
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
+
     private String name;
-    private char grade;
+    private String grade;
     private String gender;
     @Column(unique = true)
-    private Integer rollNumber;
+    private int rollNumber;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinTable(name = "student_department",
-            joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "department_id"))
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name="department_id", nullable=false)
+    @ToString.Exclude
     private Department department;
-
-    public Student(int id, String name, char grade, String gender, Integer rollNumber) {
-        this.id = id;
-        this.name = name;
-        this.grade = grade;
-        this.gender = gender;
-        this.rollNumber = rollNumber;
-    }
-
 }

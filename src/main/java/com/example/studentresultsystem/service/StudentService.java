@@ -1,6 +1,6 @@
 package com.example.studentresultsystem.service;
 
-import com.example.studentresultsystem.dto.StudentRequest;
+import com.example.studentresultsystem.entity.Department;
 import com.example.studentresultsystem.entity.Student;
 import com.example.studentresultsystem.exception.UserNotFoundException;
 import com.example.studentresultsystem.repository.StudentRepository;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
 public class StudentService {
     private static Logger LOG = LoggerFactory.getLogger(StudentService.class);
@@ -30,6 +29,7 @@ public class StudentService {
         return studentRepository.findAll();
     }
     public Student saveStudent(Student student) throws UserNotFoundException {
+        departmentService.getByID(student.getDepartment().getId());
         try {
             return studentRepository.save(student);
         } catch (DataIntegrityViolationException | ConstraintViolationException exception) {

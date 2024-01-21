@@ -1,9 +1,13 @@
 package com.example.studentresultsystem.controller;
 
 import com.example.studentresultsystem.dto.DepartmentRequest;
+import com.example.studentresultsystem.dto.StudentDTO;
+import com.example.studentresultsystem.dto.StudentRequest;
 import com.example.studentresultsystem.entity.Department;
+import com.example.studentresultsystem.entity.Student;
 import com.example.studentresultsystem.exception.UserNotFoundException;
 import com.example.studentresultsystem.mapper.DepartmentMapper;
+import com.example.studentresultsystem.mapper.StudentMapper;
 import com.example.studentresultsystem.response.ObjectResponse;
 import com.example.studentresultsystem.service.DepartmentService;
 import com.example.studentresultsystem.service.StudentService;
@@ -13,8 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/departments")
@@ -35,6 +39,41 @@ public class DSController {
     @GetMapping
     public List<Department> getAllDepartments () {
         return departmentService.getAllDepartments();
+    }
+
+    @PostMapping("/{departmentID}/students")
+    public ResponseEntity<ObjectResponse> createStudent(@PathVariable("departmentID") int departmentID,
+                                                     @Valid @RequestBody StudentRequest request)
+            throws UserNotFoundException {
+
+        Student student = StudentMapper.convertStudentRequest(departmentID, request);
+        return new ResponseEntity<>(
+                new ObjectResponse(true, Constants.STUDENT_CREATED, studentService.saveStudent(student)),
+                HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{departmentId}/students/{studentId}")
+    public ResponseEntity<ObjectResponse> updateStudent(@PathVariable("departmentId") @Valid Integer departmentId,
+                                                     @PathVariable("studentId") @Valid Integer studentId,
+                                                     @Valid @RequestBody StudentRequest request)
+            throws UserNotFoundException {
+        Student student = StudentMapper.convertStudentRequestWithID(departmentId, studentId, request);
+        return ResponseEntity.ok(
+                new ObjectResponse(true, Constants.STUDENT_UPDATED, studentService.update(student)));
+    }
+    @GetMapping("/students")
+    public List<Student> getAllStudents() {
+        return studentService.getAllStudents();
+    }
+
+    @GetMapping("/{departmentId}/students/{studentId}")
+    public ResponseEntity<ObjectResponse> getStudentById(@PathVariable("departmentId") @Valid Integer departmentId,
+                                                      @PathVariable("studentId") @Valid Integer studentId) {
+        Department department = departmentService.getByID(departmentId);
+        Student student = studentService.getById(studentId);
+        student.setDepartment(department);
+        StudentDTO studentDTO = StudentMapper.convertStudentToStudentDTO(student, department);
+        return ResponseEntity.ok(new ObjectResponse(true, Constants.STUDENT_FOUND, studentDTO));
     }
 
 }
