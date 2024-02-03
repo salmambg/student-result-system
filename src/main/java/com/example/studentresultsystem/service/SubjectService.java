@@ -27,7 +27,7 @@ public class SubjectService {
         return subjectRepository.findAll();
     }
 
-    public Subject create(Subject subject) throws UserNotFoundException {
+    public Subject saveSubject(Subject subject) throws UserNotFoundException {
         try {
             return subjectRepository.save(subject);
         } catch (DataIntegrityViolationException | ConstraintViolationException exception) {
@@ -54,7 +54,7 @@ public class SubjectService {
             throw new UserNotFoundException(Constants.ALREADY_EXISTS);
         }
     }
-    public void deleteById(Integer id) {
+    public void deleteBySubjectId(Integer id) {
         try {
             subjectRepository.deleteById(id);
         } catch (EmptyResultDataAccessException ex) {

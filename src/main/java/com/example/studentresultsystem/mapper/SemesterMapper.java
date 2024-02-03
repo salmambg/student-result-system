@@ -13,7 +13,7 @@ public final class SemesterMapper {
     public static Semester convertSemesterRequestWithID(SemesterRequest request, int id) {
         return new Semester(id, request.getName());
     }
-    public static SemesterWithOutSubjectDTO convertTSemesterWithoutSubjectDTO(Semester semester) {
+    public static SemesterWithOutSubjectDTO convertSemesterWithoutSubjectDTO(Semester semester) {
         return new SemesterWithOutSubjectDTO(
                 semester.getId(),
                semester.getName());
