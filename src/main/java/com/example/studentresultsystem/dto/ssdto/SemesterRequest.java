@@ -1,4 +1,4 @@
-package com.example.studentresultsystem.dto;
+package com.example.studentresultsystem.dto.ssdto;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -8,9 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor(staticName = "build")
 @NoArgsConstructor
-public class DepartmentRequest {
+public class SemesterRequest {
 
-    @NotNull(message = "department name should not be null")
+    @NotNull(message = "semester name should not be null")
     private String name;
-
 }

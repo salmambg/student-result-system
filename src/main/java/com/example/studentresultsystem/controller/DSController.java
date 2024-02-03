@@ -1,8 +1,8 @@
 package com.example.studentresultsystem.controller;
 
-import com.example.studentresultsystem.dto.DepartmentRequest;
-import com.example.studentresultsystem.dto.StudentDTO;
-import com.example.studentresultsystem.dto.StudentRequest;
+import com.example.studentresultsystem.dto.dsdto.DepartmentRequest;
+import com.example.studentresultsystem.dto.dsdto.StudentDTO;
+import com.example.studentresultsystem.dto.dsdto.StudentRequest;
 import com.example.studentresultsystem.entity.Department;
 import com.example.studentresultsystem.entity.Student;
 import com.example.studentresultsystem.exception.UserNotFoundException;
@@ -19,7 +19,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-
 
 @RestController
 @RequestMapping("/departments")

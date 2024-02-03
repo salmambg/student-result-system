@@ -1,10 +1,8 @@
-package com.example.studentresultsystem.dto;
+package com.example.studentresultsystem.dto.dsdto;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.List;
 
 @Data

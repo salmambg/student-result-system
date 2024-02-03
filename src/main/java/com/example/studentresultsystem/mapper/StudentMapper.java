@@ -1,6 +1,8 @@
 package com.example.studentresultsystem.mapper;
 
-import com.example.studentresultsystem.dto.*;
+import com.example.studentresultsystem.dto.dsdto.StudentDTO;
+import com.example.studentresultsystem.dto.dsdto.StudentRequest;
+import com.example.studentresultsystem.dto.dsdto.StudentWithoutDepartmentDTO;
 import com.example.studentresultsystem.entity.Department;
 import com.example.studentresultsystem.entity.Student;
 
@@ -37,7 +39,7 @@ public final class StudentMapper {
                 student.getGrade(),
                 student.getGender(),
                 student.getRollNumber(),
-                DepartmentMapper.convertDepartmentRequestWithID(department));
+                DepartmentMapper.convertDepartmentWithoutStudentDTO(department));
     }
 
 }

@@ -16,9 +16,15 @@ public class Semester {
     @Id
     @GeneratedValue
     private Integer id;
+    @Column(unique = true)
     private String name;
 
-//    @JsonManagedReference
-//    @OneToMany(mappedBy = "semester", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<Subject> subjects;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "semester", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Subject> subjects;
+
+    public Semester(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }
