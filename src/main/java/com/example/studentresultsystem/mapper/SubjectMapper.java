@@ -1,14 +1,9 @@
 package com.example.studentresultsystem.mapper;
 
-import com.example.studentresultsystem.dto.dsdto.StudentDTO;
-import com.example.studentresultsystem.dto.dsdto.StudentRequest;
-import com.example.studentresultsystem.dto.ssdto.SemesterWithOutSubjectDTO;
 import com.example.studentresultsystem.dto.ssdto.SubjectDTO;
 import com.example.studentresultsystem.dto.ssdto.SubjectRequest;
-import com.example.studentresultsystem.dto.ssdto.SubjectWithoutSemesterDTO;
-import com.example.studentresultsystem.entity.Department;
+import com.example.studentresultsystem.dto.ssdto.SubjectWithoutSemesterDTO;;
 import com.example.studentresultsystem.entity.Semester;
-import com.example.studentresultsystem.entity.Student;
 import com.example.studentresultsystem.entity.Subject;
 
 public final class SubjectMapper {

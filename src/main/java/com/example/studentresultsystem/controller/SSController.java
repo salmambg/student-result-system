@@ -1,20 +1,12 @@
 package com.example.studentresultsystem.controller;
 
-
-import com.example.studentresultsystem.dto.dsdto.DepartmentRequest;
-import com.example.studentresultsystem.dto.dsdto.StudentDTO;
-import com.example.studentresultsystem.dto.dsdto.StudentRequest;
 import com.example.studentresultsystem.dto.ssdto.SemesterRequest;
 import com.example.studentresultsystem.dto.ssdto.SubjectDTO;
 import com.example.studentresultsystem.dto.ssdto.SubjectRequest;
-import com.example.studentresultsystem.entity.Department;
 import com.example.studentresultsystem.entity.Semester;
-import com.example.studentresultsystem.entity.Student;
 import com.example.studentresultsystem.entity.Subject;
 import com.example.studentresultsystem.exception.UserNotFoundException;
-import com.example.studentresultsystem.mapper.DepartmentMapper;
 import com.example.studentresultsystem.mapper.SemesterMapper;
-import com.example.studentresultsystem.mapper.StudentMapper;
 import com.example.studentresultsystem.mapper.SubjectMapper;
 import com.example.studentresultsystem.response.ApiResponse;
 import com.example.studentresultsystem.response.ObjectResponse;
@@ -26,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -64,9 +55,9 @@ public class SSController {
         Semester semester = semesterService.getByID(id);
         return ResponseEntity.ok(new ObjectResponse(true, Constants.SEMESTER_FOUND, semester));
     }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse> deleteById(@PathVariable("id") @Valid Integer id) {
-        semesterService.deleteById(id);
+    @DeleteMapping("/{semesterId}")
+    public ResponseEntity<ApiResponse> deleteById(@PathVariable("semesterId") @Valid Integer id) {
+        semesterService.deleteBySemesterId(id);
         return ResponseEntity.ok(new ApiResponse(true, Constants.SEMESTER_FOUND));
     }
     @PostMapping("/{semesterId}/subjects")

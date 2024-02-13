@@ -24,8 +24,4 @@ public class Subject {
     @ToString.Exclude
     private Semester semester;
 
-    public Subject(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
 }

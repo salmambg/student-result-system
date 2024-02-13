@@ -1,16 +1,17 @@
 package com.example.studentresultsystem.dto.dsdto;
 
+import com.example.studentresultsystem.utils.Constants;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor(staticName = "build")
+@AllArgsConstructor
 @NoArgsConstructor
 public class DepartmentRequest {
 
-    @NotNull(message = "department name should not be null")
+    @NotNull(message = Constants.NOT_EMPTY_NAME)
     private String name;
 
 }

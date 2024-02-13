@@ -54,7 +54,7 @@ public class SemesterService {
             throw new UserNotFoundException(Constants.ALREADY_EXISTS);
         }
     }
-    public void deleteById(Integer id) {
+    public void deleteBySemesterId(Integer id) {
         try {
             semesterRepository.deleteById(id);
         } catch (EmptyResultDataAccessException ex) {
