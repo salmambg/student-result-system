@@ -19,7 +19,6 @@ public class DepartmentRepositoryTest {
         Department department = TestData.createDepartment();
         departmentRepository.save(department);
         assertEquals(1, List.of(departmentRepository.findAll()).size());
-
     }
 
 }
