@@ -38,6 +38,9 @@ public class StudentService {
             throw new UserNotFoundException(Constants.ALREADY_EXISTS);
         }
     }
+    public List<Student> getAllStudentsByDepartment(int departmentId) {
+        return studentRepository.findByDepartmentId(departmentId);
+    }
 
     public Student getById(int id) {
         Optional<Student> student = studentRepository.findById(id);
@@ -48,6 +51,7 @@ public class StudentService {
             throw new EntityNotFoundException(Constants.STUDENT_NOT_FOUND + id);
         }
     }
+
     public Student update(Student student) throws UserNotFoundException {
         Student existingStudent = getById(student.getId());
         BeanUtils.copyProperties(student, existingStudent,  "id");

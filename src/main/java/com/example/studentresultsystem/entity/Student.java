@@ -21,6 +21,7 @@ public class Student {
     private String gender;
     @Column(unique = true)
     private int rollNumber;
+//    private String semester;
 
 
 

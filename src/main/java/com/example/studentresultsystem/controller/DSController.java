@@ -18,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -73,8 +75,14 @@ public class DSController {
         return ResponseEntity.ok(new ApiResponse(true, Constants.DEPARTMENT_DELETED));
     }
     @GetMapping("/students")
-    public List<Student> getAllStudents() {
-        return studentService.getAllStudents();
+    public ResponseEntity<ObjectResponse> getAllStudents(@RequestParam(required = false) Integer departmentId) {
+        List<Student> students = new ArrayList<>();
+        if(departmentId != null) {
+            students = studentService.getAllStudentsByDepartment(departmentId);
+        } else {
+            students = studentService.getAllStudents();
+        }
+        return ResponseEntity.ok(new ObjectResponse(true, "", students));
     }
 
     @GetMapping("/{departmentId}/students/{studentId}")
