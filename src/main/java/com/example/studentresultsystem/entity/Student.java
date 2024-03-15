@@ -21,9 +21,6 @@ public class Student {
     private String gender;
     @Column(unique = true)
     private int rollNumber;
-//    private String semester;
-
-
 
     @JsonBackReference
     @ManyToOne
@@ -31,11 +28,26 @@ public class Student {
     @ToString.Exclude
     private Department department;
 
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name="semester_id", nullable=false)
+    @ToString.Exclude
+    private Semester semester;
+
     public Student(Integer id, String name, String grade, String gender, Department department) {
         this.id = id;
         this.name = name;
         this.grade = grade;
         this.gender = gender;
+        this.department = department;
+    }
+
+    public Student(Integer id, String name, String grade, String gender, int rollNumber, Department department) {
+        this.id = id;
+        this.name = name;
+        this.grade = grade;
+        this.gender = gender;
+        this.rollNumber = rollNumber;
         this.department = department;
     }
 }

@@ -43,12 +43,13 @@ public class DSController {
         return departmentService.getAllDepartments();
     }
 
-    @PostMapping("/{departmentID}/students")
+    @PostMapping("/{departmentID}/{semesterId}/students")
     public ResponseEntity<ObjectResponse> createStudent(@PathVariable("departmentID") int departmentID,
+                                                        @PathVariable("semesterId") int semesterId,
                                                      @Valid @RequestBody StudentRequest request)
             throws UserNotFoundException {
 
-        Student student = StudentMapper.convertStudentRequest(departmentID, request);
+        Student student = StudentMapper.convertStudentRequest(departmentID,semesterId, request);
         return new ResponseEntity<>(
                 new ObjectResponse(true, Constants.STUDENT_CREATED, studentService.saveStudent(student)),
                 HttpStatus.CREATED);
@@ -75,10 +76,13 @@ public class DSController {
         return ResponseEntity.ok(new ApiResponse(true, Constants.DEPARTMENT_DELETED));
     }
     @GetMapping("/students")
-    public ResponseEntity<ObjectResponse> getAllStudents(@RequestParam(required = false) Integer departmentId) {
-        List<Student> students = new ArrayList<>();
+    public ResponseEntity<ObjectResponse> getAllStudents(@RequestParam(required = false) Integer departmentId,
+                                                         @RequestParam(required = false)Integer semesterId) {
+        List<Student> students ;
         if(departmentId != null) {
             students = studentService.getAllStudentsByDepartment(departmentId);
+        } else if (semesterId != null) {
+            students = studentService.getAllStudentsBySemester(semesterId);
         } else {
             students = studentService.getAllStudents();
         }
@@ -100,7 +104,7 @@ public class DSController {
                                                      @PathVariable("departmentId") @Valid Integer departmentId,
                                                      @Valid @RequestBody StudentRequest studentRequest)
             throws UserNotFoundException {
-        Student student = StudentMapper.convertStudentRequestWithID(departmentId, studentId, studentRequest);
+        Student student = StudentMapper.convertStudentRequestWithOutSemesterID(departmentId, studentId, studentRequest);
         return ResponseEntity.ok(
                 new ObjectResponse(true, Constants.STUDENT_UPDATED,StudentMapper.convertStudentRequestWithoutDepartmentDTO(studentService.update(student))));
     }

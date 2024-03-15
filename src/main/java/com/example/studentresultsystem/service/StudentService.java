@@ -41,6 +41,9 @@ public class StudentService {
     public List<Student> getAllStudentsByDepartment(int departmentId) {
         return studentRepository.findByDepartmentId(departmentId);
     }
+    public List<Student> getAllStudentsBySemester(int semesterId) {
+        return studentRepository.findBySemesterId(semesterId);
+    }
 
     public Student getById(int id) {
         Optional<Student> student = studentRepository.findById(id);
