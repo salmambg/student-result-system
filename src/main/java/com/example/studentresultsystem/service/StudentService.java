@@ -25,12 +25,15 @@ public class StudentService {
     private StudentRepository studentRepository;
     @Autowired
     private DepartmentService departmentService;
+    @Autowired
+    private SemesterService semesterService;
 
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
     }
     public Student saveStudent(Student student) throws UserNotFoundException {
         departmentService.getByID(student.getDepartment().getId());
+        semesterService.getByID(student.getSemester().getId());
         try {
             return studentRepository.save(student);
         } catch (DataIntegrityViolationException | ConstraintViolationException exception) {

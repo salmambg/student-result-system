@@ -43,13 +43,10 @@ public class DSController {
         return departmentService.getAllDepartments();
     }
 
-    @PostMapping("/{departmentID}/{semesterId}/students")
-    public ResponseEntity<ObjectResponse> createStudent(@PathVariable("departmentID") int departmentID,
-                                                        @PathVariable("semesterId") int semesterId,
-                                                     @Valid @RequestBody StudentRequest request)
+    @PostMapping("/students")
+    public ResponseEntity<ObjectResponse> createStudent(@Valid @RequestBody StudentRequest request)
             throws UserNotFoundException {
-
-        Student student = StudentMapper.convertStudentRequest(departmentID,semesterId, request);
+        Student student = StudentMapper.convertStudentRequest(request);
         return new ResponseEntity<>(
                 new ObjectResponse(true, Constants.STUDENT_CREATED, studentService.saveStudent(student)),
                 HttpStatus.CREATED);

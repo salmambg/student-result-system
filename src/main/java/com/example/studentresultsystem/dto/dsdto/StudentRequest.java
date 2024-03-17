@@ -1,5 +1,7 @@
 package com.example.studentresultsystem.dto.dsdto;
 
+import com.example.studentresultsystem.entity.Department;
+import com.example.studentresultsystem.entity.Semester;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,5 +19,7 @@ public class StudentRequest {
     private String gender;
     @NotNull(message = "Roll number should not be null")
     private Integer rollNumber;
+    private int departmentId;
+    private int semesterId;
 
 }

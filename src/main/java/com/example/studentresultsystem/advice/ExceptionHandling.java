@@ -1,7 +1,10 @@
 package com.example.studentresultsystem.advice;
 
 import com.example.studentresultsystem.exception.UserNotFoundException;
+import com.example.studentresultsystem.response.ApiResponse;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -33,6 +36,13 @@ public class ExceptionHandling {
         Map<String, String> errorMap = new HashMap<>();
         errorMap.put("errorMessage", ex.getMessage());
         return errorMap;
+    }
+
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    ResponseEntity<ApiResponse> entityNotFoundException(EntityNotFoundException exception) {
+        return new ResponseEntity<ApiResponse>(new ApiResponse(false, exception.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
 }

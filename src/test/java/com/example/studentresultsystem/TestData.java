@@ -38,7 +38,9 @@ public class TestData {
                 studentName,
                 gender,
                 grade,
-                rollNumber
+                rollNumber,
+                departmentID,
+                semesterId
         );
     }
     public static SemesterRequest createSemesterRequest() {

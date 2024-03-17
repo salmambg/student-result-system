@@ -11,11 +11,11 @@ public final class StudentMapper {
 
     private StudentMapper() {
     }
-    public static Student convertStudentRequest( int departmentID,int semesterId ,StudentRequest request) {
+    public static Student convertStudentRequest(StudentRequest request) {
         Department department = new Department();
-        department.setId(departmentID);
+        department.setId(request.getDepartmentId());
         Semester semester = new Semester();
-        semester.setId(semesterId);
+        semester.setId(request.getSemesterId());
         return new Student(null, request.getName(),request.getGrade(),request.getGender(),request.getRollNumber(), department,semester);
     }
 
