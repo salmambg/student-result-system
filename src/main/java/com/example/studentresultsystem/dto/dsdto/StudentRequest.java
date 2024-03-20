@@ -19,6 +19,7 @@ public class StudentRequest {
     private String gender;
     @NotNull(message = "Roll number should not be null")
     private Integer rollNumber;
+    private  Integer year;
     private int departmentId;
     private int semesterId;
 

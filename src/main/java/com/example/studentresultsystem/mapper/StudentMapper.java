@@ -16,7 +16,7 @@ public final class StudentMapper {
         department.setId(request.getDepartmentId());
         Semester semester = new Semester();
         semester.setId(request.getSemesterId());
-        return new Student(null, request.getName(),request.getGrade(),request.getGender(),request.getRollNumber(), department,semester);
+        return new Student(null, request.getName(),request.getGrade(),request.getGender(),request.getRollNumber(),request.getYear(), department,semester);
     }
 
     public static Student convertStudentRequestWithID( Integer departmentID, Integer studentID,Integer semesterId, StudentRequest request) {
@@ -24,7 +24,7 @@ public final class StudentMapper {
         department.setId(departmentID);
         Semester semester = new Semester();
         semester.setId(semesterId);
-        return new Student( studentID, request.getName(),request.getGrade(),request.getGender(),request.getRollNumber(),department,semester);
+        return new Student( studentID, request.getName(),request.getGrade(),request.getGender(),request.getRollNumber(),request.getYear(),department,semester);
     }
     public static Student convertStudentRequestWithOutSemesterID( Integer departmentID, Integer studentID, StudentRequest request) {
         Department department = new Department();
@@ -38,7 +38,8 @@ public final class StudentMapper {
                 student.getName(),
                 student.getGrade(),
                 student.getGender(),
-                student.getRollNumber());
+                student.getRollNumber(),
+                student.getYear());
 
     }
 
@@ -49,6 +50,7 @@ public final class StudentMapper {
                 student.getGrade(),
                 student.getGender(),
                 student.getRollNumber(),
+                student.getYear(),
                 DepartmentMapper.convertDepartmentWithoutStudentDTO(department));
     }
 

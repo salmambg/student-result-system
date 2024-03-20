@@ -13,5 +13,6 @@ public class StudentDTO {
     private String grade;
     private String gender;
     private Integer rollNumber;
+    private Integer year;
     private DepartmentWithOutStudentDTO department;
 }

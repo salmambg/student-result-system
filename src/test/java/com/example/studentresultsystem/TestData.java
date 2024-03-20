@@ -21,6 +21,7 @@ public class TestData {
     private static final String gender = "Female";
     private static final String grade = "A";
     private static final Integer rollNumber = 1;
+    private static final Integer year = 2023;
 
     public static final Integer semesterId = 1;
     public static final String semesterName = "Semester1";
@@ -39,6 +40,7 @@ public class TestData {
                 gender,
                 grade,
                 rollNumber,
+                year,
                 departmentID,
                 semesterId
         );
@@ -63,13 +65,17 @@ public class TestData {
     public static Student createStudent() {
         Department department = new Department();
         department.setId(TestData.departmentID);
+        Semester semester = new Semester();
+        semester.setId(TestData.semesterId);
         return new Student(
                 studentId,
                 studentName,
                 gender,
                 grade,
                 rollNumber,
-                department
+                year,
+                department,
+                semester
         );
     }
 
@@ -92,12 +98,16 @@ public class TestData {
     public static Student createUpdatedStudent() {
         Department department = new Department();
         department.setId(TestData.departmentID);
+        Semester semester = new Semester();
+        semester.setId(TestData.semesterId);
         return new Student(
                 studentId,
                 studentName + " update",
                 grade + " update",
                 gender + "update",
-                department
+                year,
+                department,
+                semester
         );
     }
     public static Semester createSemester() {

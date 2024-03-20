@@ -48,6 +48,10 @@ public class StudentService {
         return studentRepository.findBySemesterId(semesterId);
     }
 
+    public List<Student> getAllStudentsByYear(int year) {
+        return studentRepository.findByYear(year);
+    }
+
     public Student getById(int id) {
         Optional<Student> student = studentRepository.findById(id);
         if (student.isPresent()) {

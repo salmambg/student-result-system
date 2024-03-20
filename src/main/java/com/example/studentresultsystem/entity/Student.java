@@ -21,6 +21,7 @@ public class Student {
     private String gender;
     @Column(unique = true)
     private int rollNumber;
+    private int year;
 
     @JsonBackReference
     @ManyToOne
@@ -34,12 +35,15 @@ public class Student {
     @ToString.Exclude
     private Semester semester;
 
-    public Student(Integer id, String name, String grade, String gender, Department department) {
+    public Student(Integer id, String name, String grade, String gender,Integer year, Department department,Semester semester) {
         this.id = id;
         this.name = name;
         this.grade = grade;
         this.gender = gender;
+        this.year = year;
         this.department = department;
+        this.semester = semester;
+
     }
 
     public Student(Integer id, String name, String grade, String gender, int rollNumber, Department department) {

@@ -13,4 +13,5 @@ public class StudentWithoutDepartmentDTO {
     private String grade;
     private String gender;
     private Integer rollNumber;
+    private Integer year;
 }

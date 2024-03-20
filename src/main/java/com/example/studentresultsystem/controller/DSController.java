@@ -74,12 +74,15 @@ public class DSController {
     }
     @GetMapping("/students")
     public ResponseEntity<ObjectResponse> getAllStudents(@RequestParam(required = false) Integer departmentId,
-                                                         @RequestParam(required = false)Integer semesterId) {
+                                                         @RequestParam(required = false)Integer semesterId,
+                                                         @RequestParam(required = false) Integer year) {
         List<Student> students ;
         if(departmentId != null) {
             students = studentService.getAllStudentsByDepartment(departmentId);
         } else if (semesterId != null) {
             students = studentService.getAllStudentsBySemester(semesterId);
+        } else if (year != null) {
+            students = studentService.getAllStudentsByYear(year);
         } else {
             students = studentService.getAllStudents();
         }
