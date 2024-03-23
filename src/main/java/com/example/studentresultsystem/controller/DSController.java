@@ -75,7 +75,8 @@ public class DSController {
     @GetMapping("/students")
     public ResponseEntity<ObjectResponse> getAllStudents(@RequestParam(required = false) Integer departmentId,
                                                          @RequestParam(required = false)Integer semesterId,
-                                                         @RequestParam(required = false) Integer year) {
+                                                         @RequestParam(required = false) Integer year,
+    @RequestParam(required = false) Boolean completedBachelor) {
         List<Student> students ;
         if(departmentId != null) {
             students = studentService.getAllStudentsByDepartment(departmentId);
@@ -83,6 +84,9 @@ public class DSController {
             students = studentService.getAllStudentsBySemester(semesterId);
         } else if (year != null) {
             students = studentService.getAllStudentsByYear(year);
+        } else if (completedBachelor != null) {
+            students = studentService.getAllStudentsFromBachelorCompletion(completedBachelor);
+
         } else {
             students = studentService.getAllStudents();
         }

@@ -16,4 +16,6 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     List<Student> findBySemesterId(int semesterId);
 
     List<Student> findByYear(int year);
+
+    List<Student> findByCompletedBachelor(boolean completedBachelor);
 }

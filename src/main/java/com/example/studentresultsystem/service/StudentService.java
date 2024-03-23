@@ -51,6 +51,9 @@ public class StudentService {
     public List<Student> getAllStudentsByYear(int year) {
         return studentRepository.findByYear(year);
     }
+    public List<Student> getAllStudentsFromBachelorCompletion(boolean completedBachelor) {
+        return studentRepository.findByCompletedBachelor(completedBachelor);
+    }
 
     public Student getById(int id) {
         Optional<Student> student = studentRepository.findById(id);
