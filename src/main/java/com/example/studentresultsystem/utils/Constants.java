@@ -15,6 +15,7 @@ public class Constants {
     public static final String DEPARTMENT_NOT_FOUND = "Department not found for id: ";
     public static final String STUDENT_NOT_FOUND = "Student not found for id: ";
     public static final String ALREADY_EXISTS = "Entity with the given name already exists. Please choose a unique name.";
+    public static final String ROLL_ALREADY_EXISTS = "Entity with the given roll number already exists. Please choose a unique roll number.";
     public static final String NOT_EMPTY_NAME = "Name can not be null!";
     public static final String DATA_VIOLATION = "Error: An unexpected data integrity violation occurred. ";
 

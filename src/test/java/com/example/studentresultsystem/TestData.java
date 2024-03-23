@@ -22,6 +22,7 @@ public class TestData {
     private static final String grade = "A";
     private static final Integer rollNumber = 1;
     private static final Integer year = 2023;
+    private static  final Boolean completedBachelor =  true;
 
     public static final Integer semesterId = 1;
     public static final String semesterName = "Semester1";
@@ -41,6 +42,7 @@ public class TestData {
                 grade,
                 rollNumber,
                 year,
+                completedBachelor,
                 departmentID,
                 semesterId
         );
@@ -74,6 +76,7 @@ public class TestData {
                 grade,
                 rollNumber,
                 year,
+                completedBachelor,
                 department,
                 semester
         );
@@ -106,6 +109,7 @@ public class TestData {
                 grade + " update",
                 gender + "update",
                 year,
+                completedBachelor,
                 department,
                 semester
         );

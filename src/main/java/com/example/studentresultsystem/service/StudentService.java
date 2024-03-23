@@ -38,7 +38,7 @@ public class StudentService {
             return studentRepository.save(student);
         } catch (DataIntegrityViolationException | ConstraintViolationException exception) {
             LOG.warn(Constants.DATA_VIOLATION + exception.getMessage());
-            throw new UserNotFoundException(Constants.ALREADY_EXISTS);
+            throw new UserNotFoundException(Constants.ROLL_ALREADY_EXISTS);
         }
     }
     public List<Student> getAllStudentsByDepartment(int departmentId) {

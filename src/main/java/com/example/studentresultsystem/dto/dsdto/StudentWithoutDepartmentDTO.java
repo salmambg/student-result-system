@@ -14,4 +14,5 @@ public class StudentWithoutDepartmentDTO {
     private String gender;
     private Integer rollNumber;
     private Integer year;
+    private boolean completedBachelor;
 }
