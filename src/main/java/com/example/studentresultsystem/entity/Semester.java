@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -22,6 +24,9 @@ public class Semester {
     @OneToMany(mappedBy = "semester", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Subject> subjects;
 
+    @JsonManagedReference
+    @ManyToMany(mappedBy = "semesters")
+    private List<Student> students = new ArrayList<>();
     public Semester(int id, String name) {
         this.id = id;
         this.name = name;

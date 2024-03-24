@@ -4,6 +4,7 @@ import com.example.studentresultsystem.dto.dsdto.DepartmentRequest;
 import com.example.studentresultsystem.dto.dsdto.StudentDTO;
 import com.example.studentresultsystem.dto.dsdto.StudentRequest;
 import com.example.studentresultsystem.entity.Department;
+import com.example.studentresultsystem.entity.Semester;
 import com.example.studentresultsystem.entity.Student;
 import com.example.studentresultsystem.exception.UserNotFoundException;
 import com.example.studentresultsystem.mapper.DepartmentMapper;
@@ -11,6 +12,7 @@ import com.example.studentresultsystem.mapper.StudentMapper;
 import com.example.studentresultsystem.response.ApiResponse;
 import com.example.studentresultsystem.response.ObjectResponse;
 import com.example.studentresultsystem.service.DepartmentService;
+import com.example.studentresultsystem.service.SemesterService;
 import com.example.studentresultsystem.service.StudentService;
 import com.example.studentresultsystem.utils.Constants;
 import jakarta.validation.Valid;
@@ -29,6 +31,8 @@ public class DSController {
     DepartmentService departmentService;
     @Autowired
     StudentService studentService;
+    @Autowired
+    SemesterService semesterService;
 
     @PostMapping
     public ResponseEntity<ObjectResponse> create(@Valid @RequestBody DepartmentRequest request)
@@ -80,9 +84,7 @@ public class DSController {
         List<Student> students ;
         if(departmentId != null) {
             students = studentService.getAllStudentsByDepartment(departmentId);
-        } else if (semesterId != null) {
-            students = studentService.getAllStudentsBySemester(semesterId);
-        } else if (year != null) {
+        }  else if (year != null) {
             students = studentService.getAllStudentsByYear(year);
         } else if (completedBachelor != null) {
             students = studentService.getAllStudentsFromBachelorCompletion(completedBachelor);

@@ -7,6 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -31,12 +34,14 @@ public class Student {
     private Department department;
 
     @JsonBackReference
-    @ManyToOne
-    @JoinColumn(name="semester_id", nullable=false)
-    @ToString.Exclude
-    private Semester semester;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "student_semester",
+            joinColumns = @JoinColumn(name = "student_id"),
+            inverseJoinColumns = @JoinColumn(name = "semester_id"))
+    private List<Semester> semesters = new ArrayList<>();
 
-    public Student(Integer id, String name, String grade, String gender,Integer year,Boolean completedBachelor ,Department department,Semester semester) {
+
+    public Student(Integer id, String name, String grade, String gender,Integer year,Boolean completedBachelor ,Department department,List<Semester> semesters) {
         this.id = id;
         this.name = name;
         this.grade = grade;
@@ -44,7 +49,7 @@ public class Student {
         this.year = year;
         this.completedBachelor = completedBachelor;
         this.department = department;
-        this.semester = semester;
+        this.semesters = semesters;
 
     }
 
@@ -54,6 +59,8 @@ public class Student {
         this.grade = grade;
         this.gender = gender;
         this.rollNumber = rollNumber;
+        this.year = year;
+        this.completedBachelor = completedBachelor;
         this.department = department;
     }
 }

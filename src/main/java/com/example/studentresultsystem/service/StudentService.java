@@ -15,7 +15,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
+
 
 @Service
 public class StudentService {
@@ -25,15 +25,12 @@ public class StudentService {
     private StudentRepository studentRepository;
     @Autowired
     private DepartmentService departmentService;
-    @Autowired
-    private SemesterService semesterService;
 
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
     }
     public Student saveStudent(Student student) throws UserNotFoundException {
         departmentService.getByID(student.getDepartment().getId());
-        semesterService.getByID(student.getSemester().getId());
         try {
             return studentRepository.save(student);
         } catch (DataIntegrityViolationException | ConstraintViolationException exception) {
@@ -44,10 +41,6 @@ public class StudentService {
     public List<Student> getAllStudentsByDepartment(int departmentId) {
         return studentRepository.findByDepartmentId(departmentId);
     }
-    public List<Student> getAllStudentsBySemester(int semesterId) {
-        return studentRepository.findBySemesterId(semesterId);
-    }
-
     public List<Student> getAllStudentsByYear(int year) {
         return studentRepository.findByYear(year);
     }

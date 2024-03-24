@@ -43,8 +43,7 @@ public class TestData {
                 rollNumber,
                 year,
                 completedBachelor,
-                departmentID,
-                semesterId
+                departmentID
         );
     }
     public static SemesterRequest createSemesterRequest() {
@@ -67,8 +66,9 @@ public class TestData {
     public static Student createStudent() {
         Department department = new Department();
         department.setId(TestData.departmentID);
-        Semester semester = new Semester();
-        semester.setId(TestData.semesterId);
+        List<Semester> semesterList = new ArrayList<>();
+        semesterList.add(createSemester());
+        semesterList.add(createSemester());
         return new Student(
                 studentId,
                 studentName,
@@ -77,8 +77,7 @@ public class TestData {
                 rollNumber,
                 year,
                 completedBachelor,
-                department,
-                semester
+                department
         );
     }
 
@@ -101,8 +100,9 @@ public class TestData {
     public static Student createUpdatedStudent() {
         Department department = new Department();
         department.setId(TestData.departmentID);
-        Semester semester = new Semester();
-        semester.setId(TestData.semesterId);
+        List<Semester> semesterList = new ArrayList<>();
+        semesterList.add(createSemester());
+        semesterList.add(createSemester());
         return new Student(
                 studentId,
                 studentName + " update",
@@ -111,7 +111,7 @@ public class TestData {
                 year,
                 completedBachelor,
                 department,
-                semester
+                semesterList
         );
     }
     public static Semester createSemester() {
@@ -130,14 +130,14 @@ public class TestData {
         );
     }
 
-    public static Semester createSemesterWithSubjects() {
-        List<Subject> subjectList = new ArrayList<>();
-        subjectList.add(createSubject());
-        return new Semester(
-                semesterId,
-                semesterName,
-                subjectList
-        );
-    }
+//    public static Semester createSemesterWithSubjects() {
+//        List<Subject> subjectList = new ArrayList<>();
+//        subjectList.add(createSubject());
+//        return new Semester(
+//                semesterId,
+//                semesterName,
+//                subjectList
+//        );
+//    }
 }
 

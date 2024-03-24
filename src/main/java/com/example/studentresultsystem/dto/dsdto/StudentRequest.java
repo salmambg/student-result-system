@@ -20,6 +20,5 @@ public class StudentRequest {
     private  Integer year;
     private boolean completedBachelor;
     private int departmentId;
-    private int semesterId;
 
 }
