@@ -1,8 +1,11 @@
 package com.example.studentresultsystem.mapper;
 
+import com.example.studentresultsystem.dto.StudentWithSemesterAndDepartmentDTO;
+import com.example.studentresultsystem.dto.dsdto.DepartmentWithOutStudentDTO;
 import com.example.studentresultsystem.dto.dsdto.StudentDTO;
 import com.example.studentresultsystem.dto.dsdto.StudentRequest;
 import com.example.studentresultsystem.dto.dsdto.StudentWithoutDepartmentDTO;
+import com.example.studentresultsystem.dto.ssdto.SemesterWithOutSubjectDTO;
 import com.example.studentresultsystem.entity.Department;
 import com.example.studentresultsystem.entity.Semester;
 import com.example.studentresultsystem.entity.Student;
@@ -42,6 +45,18 @@ public final class StudentMapper {
                 student.getYear(),
                 student.isCompletedBachelor());
 
+    }
+    public static StudentWithSemesterAndDepartmentDTO convertStudentRequestWithDepartmentAndSemesterDTO(Student student) {
+        return new StudentWithSemesterAndDepartmentDTO(
+                student.getId(),
+                student.getName(),
+                student.getGrade(),
+                student.getGender(),
+                student.getRollNumber(),
+                student.getYear(),
+                student.isCompletedBachelor(),
+                DepartmentMapper.convertDepartmentWithoutStudentDTO(student.getDepartment()),
+                SemesterMapper.convertSemesterwithoutSubjectDTOList(student.getSemesters()));
     }
 
     public static StudentDTO convertStudentToStudentDTO(Student student, Department department) {

@@ -4,6 +4,9 @@ import com.example.studentresultsystem.dto.ssdto.SemesterRequest;
 import com.example.studentresultsystem.dto.ssdto.SemesterWithOutSubjectDTO;
 import com.example.studentresultsystem.entity.Semester;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public final class SemesterMapper {
     private SemesterMapper() {
     }
@@ -17,6 +20,14 @@ public final class SemesterMapper {
         return new SemesterWithOutSubjectDTO(
                 semester.getId(),
                semester.getName());
+    }
+    public static List<SemesterWithOutSubjectDTO> convertSemesterwithoutSubjectDTOList(List<Semester> semesters) {
+        List<SemesterWithOutSubjectDTO> convertedSemesters = new ArrayList<>();
+        for (Semester semester : semesters) {
+            convertedSemesters.add(convertSemesterWithoutSubjectDTO(semester));
+        }
+
+        return convertedSemesters;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.studentresultsystem.controller;
 
+import com.example.studentresultsystem.dto.StudentWithSemesterAndDepartmentDTO;
 import com.example.studentresultsystem.dto.dsdto.StudentWithoutDepartmentDTO;
 import com.example.studentresultsystem.entity.Student;
 import com.example.studentresultsystem.mapper.StudentMapper;
@@ -25,7 +26,7 @@ public class StudentInfoController {
     public ResponseEntity<ObjectResponse> getStudentById(@PathVariable("studentId") @Valid Integer studentId) {
 
         Student student = studentService.getById(studentId);
-        StudentWithoutDepartmentDTO studentDTO = StudentMapper.convertStudentRequestWithoutDepartmentDTO(student);
+        StudentWithSemesterAndDepartmentDTO studentDTO = StudentMapper.convertStudentRequestWithDepartmentAndSemesterDTO(student);
         return ResponseEntity.ok(new ObjectResponse(true, Constants.STUDENT_FOUND, studentDTO));
     }
 }
