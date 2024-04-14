@@ -3,7 +3,6 @@ package com.example.studentresultsystem.mapper;
 import com.example.studentresultsystem.dto.ssdto.SemesterRequest;
 import com.example.studentresultsystem.dto.ssdto.SemesterWithOutSubjectDTO;
 import com.example.studentresultsystem.entity.Semester;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +25,6 @@ public final class SemesterMapper {
         for (Semester semester : semesters) {
             convertedSemesters.add(convertSemesterWithoutSubjectDTO(semester));
         }
-
         return convertedSemesters;
     }
 

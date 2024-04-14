@@ -3,8 +3,6 @@ package com.example.studentresultsystem.mapper;
 import com.example.studentresultsystem.dto.dsdto.DepartmentRequest;
 import com.example.studentresultsystem.dto.dsdto.DepartmentWithOutStudentDTO;
 import com.example.studentresultsystem.entity.Department;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public final class DepartmentMapper {
 
