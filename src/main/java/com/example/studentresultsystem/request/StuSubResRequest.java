@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StuSubResRequest {
-    private int marks;
-    private int studentId;
-    private int subjectId;
+    private Integer marks;
+    private Integer studentId;
+    private Integer subjectId;
 }

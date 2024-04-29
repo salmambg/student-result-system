@@ -16,6 +16,6 @@ public class StudentResultDto {
     private Integer rollNumber;
     private Integer year;
     private boolean completedBachelor;
-    List<resultDTO> resultDTOS;
+    List<resultDTO> subjectGrade;
     private double CGPA;
 }
