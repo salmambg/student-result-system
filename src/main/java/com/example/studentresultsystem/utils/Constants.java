@@ -31,6 +31,8 @@ public class Constants {
     public static final String  SUBJECT_FOUND = "Subject  found successfully!";
     public static final String SUBJECT_NOT_FOUND = "SUBJECT not found for id: ";
 
+    public static final String STUDENT_RESULT_FOUND = "Result found successfully";
+
 
 }
 

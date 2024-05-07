@@ -1,7 +1,7 @@
 package com.example.studentresultsystem.controller;
 
+import com.example.studentresultsystem.dto.StudentResultDto;
 import com.example.studentresultsystem.dto.StudentWithSemesterAndDepartmentDTO;
-import com.example.studentresultsystem.dto.dsdto.StudentWithoutDepartmentDTO;
 import com.example.studentresultsystem.entity.Student;
 import com.example.studentresultsystem.mapper.StudentMapper;
 import com.example.studentresultsystem.repository.ResultRepository;
@@ -15,7 +15,6 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Map;
 
 @RestController
@@ -42,6 +41,11 @@ public class StudentInfoController {
     public ResponseEntity<ObjectResponse> saveResultForSubject(@RequestBody StuSubResRequest request){
         Map<String, Object> result = resultService.getStudentResultWithGrade(request);
         return ResponseEntity.ok().body(new ObjectResponse(true,"Result", result));
+    }
+    @GetMapping("/{studentId}/result")
+    public ResponseEntity<ObjectResponse> getStudentResultWithCGPA(@PathVariable Integer studentId) {
+        StudentResultDto studentResultDTO = resultService.getResultByStudentId(studentId);
+        return ResponseEntity.ok(new ObjectResponse(true,Constants.STUDENT_RESULT_FOUND, studentResultDTO));
     }
 
 

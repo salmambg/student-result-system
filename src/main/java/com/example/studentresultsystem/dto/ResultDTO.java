@@ -7,8 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class resultDTO {
-    private int id;
+public class ResultDTO {
     private String subjectName;
     private String grade;
 }
